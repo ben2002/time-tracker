@@ -7,15 +7,17 @@ const insert = (values) => {
 };
 
 const getAll = (user_id) => {
-	return knex(TABLE).select('id', 'user_id', 'title').where({ user_id });
+	return knex(TABLE).select('id', 'user_id', 'title', 'finished').where({ user_id });
 };
 
-// not in use
+const getJobById = (id) => {
+	return knex(TABLE).select('*').where({ id });
+};
+
 const update = (id, values) => {
 	return knex(TABLE).update(values).where({ id });
 };
 
-// not in use
 const deleteById = (id) => {
 	return knex(TABLE).where({ id }).del();
 };
@@ -23,6 +25,7 @@ const deleteById = (id) => {
 module.exports = {
 	insert,
 	getAll,
+	getJobById,
 	update,
 	deleteById
 };

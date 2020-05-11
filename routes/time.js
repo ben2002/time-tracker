@@ -15,16 +15,25 @@ router.post('/:id', auth, async (req, res) => {
 		job_id: req.params.id,
 		user_id: req.user.id
 	};
-	const resultID = await timeStorage.insert(values);
-	res.status(200).json({ resultID });
+	const timeId = await timeStorage.insert(values);
+	res.status(200).json({ timeId: timeId[0], success: true });
 });
 
 // @route   GET api/time
 // @desc    get all job times
 // @access  Private
 router.get('/:id', auth, async (req, res) => {
-	const result = await timeStorage.getAll(job_id);
-	res.status(200).json({ result });
+	const times = await timeStorage.getAll(req.params.id);
+	res.status(200).json({ times, success: true });
+});
+
+// @route   GET api/time/total
+// @desc    get total time of a job
+// @access  Private
+router.get('/total/:id', auth, async (req, res) => {
+	let totalTimePerJob = await timeStorage.getTotalTimePerJob(req.params.id);
+	totalTimePerJob = totalTimePerJob[0]['sum(`duration`)'];
+	res.status(200).json({ totalTimePerJob, success: true });
 });
 
 // @route   PUT api/time
@@ -45,11 +54,11 @@ router.put('/', auth, async (req, res) => {
 	const duration = to - from;
 	// update db with duration in milliseconds
 	const updateValue = { to, duration };
-	const resultUpdate = await timeStorage.update(id, updateValue);
+	await timeStorage.update(id, updateValue);
 	// convert milliseconds to hh:mm:ss for frontend
-	const workingTime = timeService.timeConversion(duration);
+	const currentTime = timeService.timeConversion(duration);
 	// send duration to client
-	res.status(200).json({ workingTime, success: true });
+	res.status(200).json({ currentTime, success: true });
 });
 
 // @route   DELETE api/time

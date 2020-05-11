@@ -14,12 +14,18 @@ const selectMaxId = (user_id) => {
 	return knex(TABLE).where({ user_id }).max('id', { as: 'id' });
 };
 
+// not in use?
 const getById = (id) => {
 	return knex(TABLE).select('from').where({ id });
 };
 
 const getAll = (job_id) => {
-	return knex(TABLE).select('id', 'job_id', 'from', 'to', 'duration').where({ job_id });
+	return knex(TABLE).select('id', 'job_id', 'from', 'to', 'duration', 'comment').where({ job_id });
+};
+
+const getTotalTimePerJob = (job_id) => {
+	// get times with the same job-id and make the sum of duration
+	return knex(TABLE).sum('duration').where({ job_id });
 };
 
 const deleteById = (id) => {
@@ -32,5 +38,6 @@ module.exports = {
 	selectMaxId,
 	getById,
 	getAll,
-	deleteById
+	deleteById,
+	getTotalTimePerJob
 };

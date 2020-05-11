@@ -14,8 +14,10 @@ router.post('/', auth, async (req, res) => {
 		title: req.body.title
 	};
 	// insert job in db
-	await jobStorage.insert(values);
-	res.status(200).json({ success: true });
+	const resultId = await jobStorage.insert(values);
+	let job = await jobStorage.getJobById(resultId[0]);
+	job = job[0];
+	res.status(200).json({ job, success: true });
 });
 
 // @route   GET api/job
@@ -24,7 +26,26 @@ router.post('/', auth, async (req, res) => {
 router.get('/', auth, async (req, res) => {
 	// we access req.user.id from auth-middelware
 	const result = await jobStorage.getAll(req.user.id);
-	res.status(200).json({ result, success: true });
+	res.status(200).json({ jobs: result, success: true });
+});
+
+// @route   PUT api/job/:id
+// @desc    update a job
+// @access  Private
+router.put('/:id', auth, async (req, res) => {
+	const updateValue = { title: req.body.title };
+	await jobStorage.update(req.params.id, updateValue);
+	let job = await jobStorage.getJobById(req.params.id);
+	job = job[0];
+	res.status(200).json({ job, success: true });
+});
+
+// @route   DELETE api/job/:id
+// @desc    delete job
+// @access  Private
+router.delete('/:id', auth, async (req, res) => {
+	const result = await jobStorage.deleteById(req.params.id);
+	res.status(200).json({ id: req.params.id, success: true });
 });
 
 module.exports = router;

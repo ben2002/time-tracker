@@ -7,25 +7,50 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 import Navbar from './components/layouts/Navbar';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
-import About from './components/layouts/About';
+import About from './components/pages/About';
+import AuthState from './context/auth/AuthState';
+import JobState from './context/job/JobState';
+import TimeState from './context/time/TimeState';
+import Home from './components/pages/Home';
+import Times from './components/time/Times';
+import PrivateRoute from './components/routing/PrivateRoute';
 
 const App = () => {
 	useEffect(() => {
 		// init Material JS
 		M.AutoInit();
 	});
+
 	return (
-		<Router>
-			<Fragment>
-				<Navbar />
-				<Switch>
-					<Route exact path='/' component={Login} />
-					<Route exact path='/about' component={About} />
-					<Route exact path='/register' component={Register} />
-				</Switch>
-			</Fragment>
-		</Router>
+		<AuthState>
+			<JobState>
+				<TimeState>
+					<Router>
+						<Fragment>
+							<Navbar />
+							<Switch>
+								<PrivateRoute exact path='/' component={Home} />
+								<Route exact path='/login' component={Login} />
+								<Route exact path='/about' component={About} />
+								<Route exact path='/register' component={Register} />
+								<Route exact path='/:id' component={Times} />
+							</Switch>
+						</Fragment>
+					</Router>
+				</TimeState>
+			</JobState>
+		</AuthState>
 	);
 };
 
 export default App;
+
+// @todo
+// Frontend and Backend user-input validation!!!
+
+// jobs separat anzeigen (fertig oder nicht)
+
+// add Grid-system
+// Navbar mit Mobil-Sidebar
+// add preloaders when time is running
+// disabled Buttons, flat Buttons

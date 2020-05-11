@@ -8,11 +8,15 @@ const insert = (values) => {
 
 // not in use
 const getAll = () => {
-	return knex(TABLE).select('id', 'name', 'email', 'password');
+	return knex(TABLE).select('id', 'email');
 };
 
-const getUser = (email) => {
-	return knex(TABLE).select('*').where({ email });
+const getUserByMail = (email) => {
+	return knex(TABLE).select('id', 'name', 'email', 'password').where({ email });
+};
+
+const getUserById = (id) => {
+	return knex(TABLE).select('id', 'name', 'email').where({ id });
 };
 
 // not in use
@@ -28,7 +32,8 @@ const deleteById = (id) => {
 module.exports = {
 	insert,
 	getAll,
-	getUser,
+	getUserByMail,
+	getUserById,
 	update,
 	deleteById
 };

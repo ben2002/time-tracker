@@ -7,12 +7,12 @@ require('dotenv').config();
 const userStorage = require('../storage/userStorage');
 
 // @route   POST api/user
-// @desc    register a user
+// @desc    Register a user
 // @access  Public
 router.post('/', async (req, res) => {
 	const { name, email, password } = req.body;
 
-	const user = await userStorage.getUser(email);
+	const user = await userStorage.getUserByMail(email);
 	// ckeck if email already exists
 	if (user.length > 0) {
 		return res.status(400).json({ msg: 'benutzer existiert schon!', success: false });
@@ -29,12 +29,13 @@ router.post('/', async (req, res) => {
 	// insert user in db
 	const resultID = await userStorage.insert(values);
 
-	// sign a JWT
+	// create payload of JWT
 	const payload = {
 		user: {
 			id: resultID[0]
 		}
 	};
+	// sign a JWT
 	jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 }, (err, token) => {
 		if (err) throw err;
 		return res.json({ token, success: true });

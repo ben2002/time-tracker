@@ -1,59 +1,41 @@
-.fal.fa-clock {
-	margin-left: 40px;
+body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 1rem;
 }
 
-.navItems {
-	margin-right: 40px;
+.text-bold {
+	font-weight: bold;
 }
 
-/* Padding */
-.p {
-	padding: 0.5rem;
-}
-.p-1 {
-	padding: 1rem;
-}
-.p-2 {
-	padding: 2rem;
-}
-.p-3 {
-	padding: 3rem;
-}
-.py {
-	padding: 0.5rem 0;
-}
-.py-1 {
-	padding: 1rem 0;
-}
-.py-2 {
-	padding: 2rem 0;
-}
-.py-3 {
-	padding: 3rem 0;
+.inline-icon {
+	vertical-align: bottom;
+	font-size: 24px !important;
 }
 
-/* Margin */
-.m {
-	margin: 0.5rem;
+.margin-auto {
+	margin: auto;
 }
-.m-1 {
-	margin: 1rem;
+
+.margin-bottom {
+	margin-bottom: 1rem;
 }
-.m-2 {
-	margin: 2rem;
+
+.margin-top {
+	margin-top: 20px;
 }
-.m-3 {
-	margin: 3rem;
+
+.mg-top-50 {
+	margin-top: 50px;
 }
-.my {
-	margin: 0.5rem 0;
+
+.mg-top-100 {
+	margin-top: 100px;
 }
-.my-1 {
-	margin: 1rem 0;
+
+.btn-block {
+	width: 100%;
 }
-.my-2 {
-	margin: 2rem 0;
-}
-.my-3 {
-	margin: 3rem 0;
+
+.border {
+	border: 1px solid rgb(110, 110, 110);
 }
