@@ -5,7 +5,8 @@ import {
 	UPDATE_JOB,
 	JOB_ERROR,
 	SET_CURRENT,
-	CLEAR_CURRENT
+	CLEAR_CURRENT,
+	CLEAR_ERRORS
 } from '../types';
 
 const jobReducer = (state, action) => {
@@ -60,6 +61,11 @@ const jobReducer = (state, action) => {
 				...state,
 				error: action.payload.msg,
 				success: action.payload.success
+			};
+		case CLEAR_ERRORS:
+			return {
+				...state,
+				error: null
 			};
 		default:
 			return state;

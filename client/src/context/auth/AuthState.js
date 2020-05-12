@@ -56,6 +56,7 @@ export const register = async (user, dispatch) => {
 			payload: res.data
 		});
 	} catch (error) {
+		console.log('ich bin im error');
 		dispatch({
 			type: REGISTER_FAIL,
 			payload: error.response.data
@@ -84,6 +85,13 @@ export const logout = (dispatch) => {
 	console.log('ausgeloggt');
 	dispatch({
 		type: LOGOUT
+	});
+};
+
+// Clear errors
+export const clearErrors = (dispatch) => {
+	dispatch({
+		type: CLEAR_ERRORS
 	});
 };
 

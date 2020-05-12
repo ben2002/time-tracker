@@ -29,7 +29,6 @@ const authReducer = (state, action) => {
 		case AUTH_ERROR:
 		case LOGIN_FAIL:
 			localStorage.removeItem('token');
-			console.log(action.payload.msg);
 			return {
 				...state,
 				isAuthenticated: action.payload.success,
@@ -45,6 +44,11 @@ const authReducer = (state, action) => {
 				error: null,
 				token: null,
 				user: null
+			};
+		case CLEAR_ERRORS:
+			return {
+				...state,
+				error: null
 			};
 
 		default:

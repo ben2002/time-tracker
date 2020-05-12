@@ -1,11 +1,11 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
-import { addJob, useJob, updateJob, clearCurrent } from '../../context/job/JobState';
+import { addJob, useJob, updateJob, clearCurrent, clearErrors } from '../../context/job/JobState';
 
 const JobForm = () => {
 	const [jobState, jobDispatch] = useJob();
-	const { current } = jobState;
+	const { current, error } = jobState;
 
 	const [title, setTitle] = useState('');
 
@@ -13,20 +13,26 @@ const JobForm = () => {
 		if (current) {
 			setTitle(current.title);
 		} else {
-			setTitle('');
+			//setTitle('');
 		}
-	}, [current]);
+
+		if (error === 'Title already exists') {
+			M.toast({ html: 'Title already exists' });
+			clearErrors(jobDispatch);
+		}
+	}, [error, current]);
 
 	const onSubmit = (e) => {
 		e.preventDefault();
 		if (title !== '') {
 			if (current) {
 				updateJob(current.id, title, jobDispatch);
+				setTitle('');
+				clear();
 			} else {
 				addJob(title, jobDispatch);
+				setTitle('');
 			}
-			setTitle('');
-			clear();
 		} else {
 			M.toast({ html: 'Please enter a project title' });
 		}

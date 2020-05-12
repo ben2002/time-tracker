@@ -30,7 +30,7 @@ const Times = ({ match, history }) => {
 						<span>You have no tracked times for this project...</span>
 					</div>
 					<button
-						className='btn waves-effect z-depth-0 cyan darken-3 waves-light mg-top-50'
+						className='btn z-depth-0 grey waves-light mg-top-50'
 						onClick={() => history.goBack()}>
 						Back
 					</button>

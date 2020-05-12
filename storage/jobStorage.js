@@ -10,8 +10,8 @@ const getAll = (user_id) => {
 	return knex(TABLE).select('id', 'user_id', 'title', 'finished').where({ user_id });
 };
 
-const getJobById = (id) => {
-	return knex(TABLE).select('*').where({ id });
+const getJobByValue = (value) => {
+	return knex(TABLE).select('*').where(value);
 };
 
 const update = (id, values) => {
@@ -25,7 +25,7 @@ const deleteById = (id) => {
 module.exports = {
 	insert,
 	getAll,
-	getJobById,
+	getJobByValue,
 	update,
 	deleteById
 };

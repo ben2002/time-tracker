@@ -126,6 +126,13 @@ export const clearCurrent = (dispatch) => {
 	});
 };
 
+// Clear errors
+export const clearErrors = (dispatch) => {
+	dispatch({
+		type: CLEAR_ERRORS
+	});
+};
+
 const JobState = (props) => {
 	const initState = {
 		jobs: null,

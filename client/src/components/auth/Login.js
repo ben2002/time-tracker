@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth, login } from '../../context/auth/AuthState';
+import { useAuth, login, clearErrors } from '../../context/auth/AuthState';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 const Login = (props) => {
 	const [authState, authDispatch] = useAuth();
+	const { error, isAuthenticated } = authState;
 
 	useEffect(() => {
-		if (authState.isAuthenticated) {
+		if (isAuthenticated) {
 			props.history.push('/');
 		}
-	}, [authState.isAuthenticated, props.history]);
+
+		if (error === 'Invalid eMail or password') {
+			M.toast({ html: error });
+			clearErrors(authDispatch);
+		}
+	}, [error, isAuthenticated, props.history]);
 
 	// local state
 	const [user, setUser] = useState({
@@ -19,6 +26,9 @@ const Login = (props) => {
 	// clickhandler
 	const onSubmit = (e) => {
 		e.preventDefault();
+		if (user.name === '' || user.password === '') {
+			M.toast({ html: 'Please fill out all fields' });
+		}
 		login(user, authDispatch);
 	};
 

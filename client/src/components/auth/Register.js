@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth, register } from '../../context/auth/AuthState';
+import { useAuth, register, clearErrors } from '../../context/auth/AuthState';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 const Register = (props) => {
 	const [authState, authDispatch] = useAuth();
+	const { error, isAuthenticated } = authState;
 
 	useEffect(() => {
-		if (authState.isAuthenticated) {
+		if (isAuthenticated) {
 			props.history.push('/');
 		}
-	}, [authState.isAuthenticated, props.history]);
+
+		if (error === 'User already exists') {
+			M.toast({ html: error });
+			clearErrors(authDispatch);
+		}
+	}, [error, isAuthenticated, props.history]);
 
 	// local state
 	const [user, setUser] = useState({
@@ -21,7 +28,15 @@ const Register = (props) => {
 	// clickhandler
 	const onSubmit = (e) => {
 		e.preventDefault();
-		register(user, authDispatch);
+		if (user.name === '' || user.email === '' || user.password === '' || user.password2 === '') {
+			M.toast({ html: 'Please fill out all fields' });
+		} else if (user.password !== user.password2) {
+			M.toast({ html: 'Passwords do not match' });
+		} else if (user.password.length < 6) {
+			M.toast({ html: 'Please enter a password with 6 or more characters' });
+		} else {
+			register(user, authDispatch);
+		}
 	};
 
 	// clickhandler
@@ -47,7 +62,7 @@ const Register = (props) => {
 				</div>
 				<div className='row'>
 					<div className='input-field col offset-s4 s4'>
-						<input type='email' name='email' className='validate' onChange={onChange} />
+						<input type='email' name='email' onChange={onChange} />
 						<label htmlFor='email'>Email</label>
 					</div>
 				</div>
