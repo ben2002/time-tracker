@@ -2,6 +2,7 @@
 .env
 
 models/
+migrations/
 
 node_modules/
 
