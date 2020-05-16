@@ -7,6 +7,7 @@ const { check, validationResult } = require('express-validator');
 const config = require('config');
 
 const userStorage = require('../storage/userStorage');
+const auth = require('../middleware/auth');
 
 // @route   POST api/user
 // @desc    Register a user
