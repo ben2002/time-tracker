@@ -5,6 +5,8 @@ models/
 
 node_modules/
 
+/*.lock
+
 
 .DS_Store
 /client/.env.local
