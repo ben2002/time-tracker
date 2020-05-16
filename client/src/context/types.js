@@ -12,6 +12,7 @@ export const DELETE_JOB = 'DELETE_JOB';
 export const UPDATE_JOB = 'UPDATE_JOB';
 export const JOB_FINISHED = 'JOB_FINISHED';
 export const JOB_ERROR = 'JOB_ERROR';
+export const CLEAR_JOBS = 'CLEAR_JOBS';
 export const SET_CURRENT = 'SET_CURRENT';
 export const CLEAR_CURRENT = 'CLEAR_CURRENT';
 export const GET_TIMES = 'GET_TIMES';

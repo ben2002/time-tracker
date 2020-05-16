@@ -19,7 +19,7 @@ router.post('/', auth, async (req, res) => {
 		title: req.body.title
 	};
 	// insert job in db
-	const resultId = await jobStorage.insert(values);
+	const resultId = await jobStorage.insert(values).returning('id');
 	let job = await jobStorage.getJobByValue({ id: resultId[0] });
 	job = job[0];
 	res.status(200).json({ job, success: true });

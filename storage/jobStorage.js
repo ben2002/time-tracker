@@ -11,7 +11,7 @@ const getAll = (user_id) => {
 };
 
 const getJobByValue = (value) => {
-	return knex(TABLE).select('*').where(value);
+	return knex(TABLE).select('id', 'user_id', 'title', 'finished').where(value);
 };
 
 const update = (id, values) => {

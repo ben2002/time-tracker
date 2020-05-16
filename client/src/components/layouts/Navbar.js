@@ -2,10 +2,12 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth, logout } from '../../context/auth/AuthState';
 import { useTime, stopTime } from '../../context/time/TimeState';
+import { useJob, clearJobs } from '../../context/job/JobState';
 
 const Navbar = () => {
 	const [authState, authDispatch] = useAuth();
 	const [timeState, timeDispatch] = useTime();
+	const [JobState, jobDispatch] = useJob();
 
 	const { isAuthenticated, user } = authState;
 	const { isRunning } = timeState;
@@ -13,7 +15,8 @@ const Navbar = () => {
 	const onLogout = () => {
 		if (isRunning) {
 			stopTime(timeDispatch);
-			// @todo: clear jobs on logout
+			// @todo: clear jobs on logout --done
+			clearJobs(jobDispatch);
 		}
 		logout(authDispatch);
 	};

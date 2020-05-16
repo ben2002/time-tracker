@@ -6,7 +6,8 @@ import {
 	JOB_ERROR,
 	SET_CURRENT,
 	CLEAR_CURRENT,
-	CLEAR_ERRORS
+	CLEAR_ERRORS,
+	CLEAR_JOBS
 } from '../types';
 
 const jobReducer = (state, action) => {
@@ -66,6 +67,11 @@ const jobReducer = (state, action) => {
 			return {
 				...state,
 				error: null
+			};
+		case CLEAR_JOBS:
+			return {
+				...state,
+				jobs: null
 			};
 		default:
 			return state;

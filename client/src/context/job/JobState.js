@@ -12,7 +12,8 @@ import {
 	JOB_ERROR,
 	SET_CURRENT,
 	CLEAR_CURRENT,
-	CLEAR_ERRORS
+	CLEAR_ERRORS,
+	CLEAR_JOBS
 } from '../types';
 
 // create custom hook
@@ -130,6 +131,13 @@ export const clearCurrent = (dispatch) => {
 export const clearErrors = (dispatch) => {
 	dispatch({
 		type: CLEAR_ERRORS
+	});
+};
+
+// Clear jobs on logout
+export const clearJobs = (dispatch) => {
+	dispatch({
+		type: CLEAR_JOBS
 	});
 };
 
