@@ -73,6 +73,7 @@ export const login = async (user, dispatch) => {
 			payload: res.data
 		});
 	} catch (error) {
+		console.log('ich bin im error');
 		dispatch({
 			type: LOGIN_FAIL,
 			payload: error.response.data

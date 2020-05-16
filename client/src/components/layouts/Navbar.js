@@ -15,9 +15,9 @@ const Navbar = () => {
 	const onLogout = () => {
 		if (isRunning) {
 			stopTime(timeDispatch);
-			// @todo: clear jobs on logout --done
-			clearJobs(jobDispatch);
 		}
+		// @todo: clear jobs on logout --done
+		clearJobs(jobDispatch);
 		logout(authDispatch);
 	};
 

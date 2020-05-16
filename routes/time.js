@@ -15,7 +15,7 @@ router.post('/:id', auth, async (req, res) => {
 		job_id: req.params.id,
 		user_id: req.user.id
 	};
-	const timeId = await timeStorage.insert(values);
+	const timeId = await timeStorage.insert(values).returning('id');
 	res.status(200).json({ timeId: timeId[0], success: true });
 });
 

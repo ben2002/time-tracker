@@ -41,7 +41,7 @@ router.post(
 			password: hashedPassword
 		};
 		// insert user in db
-		const resultID = await userStorage.insert(values);
+		const resultID = await userStorage.insert(values).returning('id');
 
 		// create payload of JWT
 		const payload = {
