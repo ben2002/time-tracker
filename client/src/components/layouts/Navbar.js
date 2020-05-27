@@ -101,8 +101,7 @@ const Navbar = () => {
 			<nav style={{ marginBottom: '30px', padding: '0 15px' }} className='cyan darken-3'>
 				<div className='nav-wrapper cyan darken-3'>
 					<Link to='/'>
-						<i style={{ padding: '0 15px 0 30px' }} className='fal fa-clock fa'></i>{' '}
-						<span style={{ fontSize: '1.5rem' }}>TIME-TRACKER</span>
+						<span className='pd-top-50 text-size-mid'>TIME-TRACKER</span>
 					</Link>
 					<a href='!#' data-target='mobile' className='sidenav-trigger'>
 						<i className='material-icons'>menu</i>
