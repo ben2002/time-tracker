@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import {
 	GET_JOBS,
+	GET_JOB,
 	ADD_JOB,
 	DELETE_JOB,
 	UPDATE_JOB,
@@ -12,7 +13,8 @@ import {
 	JOB_ERROR,
 	SET_CURRENT,
 	CLEAR_CURRENT,
-	CLEAR_ERRORS
+	CLEAR_ERRORS,
+	CLEAR_JOBS
 } from '../types';
 
 // create custom hook
@@ -36,6 +38,14 @@ export const getJobs = async (dispatch) => {
 			payload: error.response.data
 		});
 	}
+};
+
+// Get selected job
+export const getSelectedJob = (jobId, dispatch) => {
+	dispatch({
+		type: GET_JOB,
+		payload: jobId
+	});
 };
 
 // Add jobs
@@ -133,10 +143,18 @@ export const clearErrors = (dispatch) => {
 	});
 };
 
+// Clear jobs on logout
+export const clearJobs = (dispatch) => {
+	dispatch({
+		type: CLEAR_JOBS
+	});
+};
+
 const JobState = (props) => {
 	const initState = {
 		jobs: null,
 		loading: true,
+		selected: null,
 		current: null,
 		error: null,
 		success: true

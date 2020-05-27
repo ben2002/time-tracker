@@ -6,6 +6,7 @@ require('dotenv').config();
 const { check, validationResult } = require('express-validator');
 
 const userStorage = require('../storage/userStorage');
+const auth = require('../middleware/auth');
 
 // @route   POST api/user
 // @desc    Register a user
@@ -39,7 +40,7 @@ router.post(
 			password: hashedPassword
 		};
 		// insert user in db
-		const resultID = await userStorage.insert(values);
+		const resultID = await userStorage.insert(values).returning('id');
 
 		// create payload of JWT
 		const payload = {
@@ -55,10 +56,19 @@ router.post(
 	}
 );
 
+// @route   GET api/user
+// @desc    Get all users
+// @access  Private
+router.get('/', auth, async (req, res) => {
+	const result = await userStorage.getAll();
+	res.status(200).json({ jobs: result, success: true });
+});
+
 // @route   DELETE api/user
 // @desc    Delete a user
-// @access  Public
-router.delete('/:id', async (req, res) => {
+// @access  Private
+router.delete('/:id', auth, async (req, res) => {
+	// @ todo: make private route --done
 	const result = await userStorage.deleteById(req.params.id);
 	res.status(200).json({ success: true });
 });

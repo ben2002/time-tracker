@@ -8,7 +8,7 @@ const insert = (values) => {
 
 // not in use
 const getAll = () => {
-	return knex(TABLE).select('id', 'email');
+	return knex(TABLE).select('id', 'email', 'name');
 };
 
 const getUserByMail = (email) => {

@@ -1,12 +1,14 @@
 import {
 	GET_JOBS,
+	GET_JOB,
 	ADD_JOB,
 	DELETE_JOB,
 	UPDATE_JOB,
 	JOB_ERROR,
 	SET_CURRENT,
 	CLEAR_CURRENT,
-	CLEAR_ERRORS
+	CLEAR_ERRORS,
+	CLEAR_JOBS
 } from '../types';
 
 const jobReducer = (state, action) => {
@@ -15,6 +17,13 @@ const jobReducer = (state, action) => {
 			return {
 				...state,
 				jobs: action.payload.jobs,
+				success: action.payload.success,
+				loading: false
+			};
+		case GET_JOB:
+			return {
+				...state,
+				selected: state.jobs.map((job) => job.id === action.payload.id),
 				success: action.payload.success,
 				loading: false
 			};
@@ -66,6 +75,11 @@ const jobReducer = (state, action) => {
 			return {
 				...state,
 				error: null
+			};
+		case CLEAR_JOBS:
+			return {
+				...state,
+				jobs: null
 			};
 		default:
 			return state;
