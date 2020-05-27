@@ -4,7 +4,6 @@ const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 require('dotenv').config();
 const { check, validationResult } = require('express-validator');
-const config = require('config');
 
 const userStorage = require('../storage/userStorage');
 const auth = require('../middleware/auth');
@@ -50,7 +49,7 @@ router.post(
 			}
 		};
 		// sign a JWT
-		jwt.sign(payload, config.get('JWT_SECRET'), { expiresIn: 3600 }, (err, token) => {
+		jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 }, (err, token) => {
 			if (err) throw err;
 			return res.json({ token, success: true });
 		});

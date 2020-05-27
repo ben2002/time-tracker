@@ -21,6 +21,7 @@ const JobItem = ({ job }) => {
 		(async function test() {
 			try {
 				let totalTimePerJob = await axios.get(`api/time/total/${id}`);
+				console.log('front:', totalTimePerJob);
 				totalTimePerJob = totalTimePerJob.data.totalTimePerJob;
 				setTotalTime(timeConversionBackend(totalTimePerJob));
 			} catch (error) {

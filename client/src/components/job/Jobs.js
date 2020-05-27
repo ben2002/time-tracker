@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 
 import { useJob, getJobs } from '../../context/job/JobState';
 import JobItem from './JobItem';
+import jobSelected from './JobSelected';
 import Spinner from '../layouts/Spinner';
+import JobSelected from './JobSelected';
 
 const Jobs = () => {
 	const [state, dispatch] = useJob();
@@ -28,9 +30,11 @@ const Jobs = () => {
 	}
 
 	return (
-		<div className='col s12 m5 l5'>
-			{jobs !== null && !loading && jobs.map((job) => <JobItem job={job} key={job.id} />)}
-		</div>
+		<Fragment>
+			<div className='col s12 m5 l5'>
+				{jobs !== null && !loading && jobs.map((job) => <JobItem job={job} key={job.id} />)}
+			</div>
+		</Fragment>
 	);
 };
 

@@ -41,23 +41,30 @@ const Login = (props) => {
 		<div className='container'>
 			<form className='col s12' onSubmit={onSubmit}>
 				<div className='row'>
-					<div className='col offset-s4 s8'>
+					<div className='col s12 l4'></div>
+					<div className='col s12 l4 text-center'>
 						<h4>
 							Account <span className='cyan-text text-darken-3'> Login </span>
 						</h4>
 					</div>
+					<div className='col s12 l4'></div>
 				</div>
+
 				<div className='row'>
-					<div className='input-field col offset-s4 s4'>
+					<div className='input-field col s1 m3 l4'></div>
+					<div className='input-field col s10 m6 l4'>
 						<input name='email' onChange={onChange} type='email' className='validate' />
 						<label htmlFor='email'>Email</label>
 					</div>
+					<div className='input-field col s1 m3 l4'></div>
 				</div>
 				<div className='row'>
-					<div className='input-field col offset-s4 s4'>
+					<div className='input-field col s1 m3 l4'></div>
+					<div className='input-field col s10 m6 l4'>
 						<input name='password' onChange={onChange} type='password' className='validate' />
 						<label htmlFor='password'>Password</label>
 					</div>
+					<div className='input-field col s1 m3 l4'></div>
 				</div>
 				<div className='row'>
 					<div className='col offset-s4'>

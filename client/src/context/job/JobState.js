@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import {
 	GET_JOBS,
+	GET_JOB,
 	ADD_JOB,
 	DELETE_JOB,
 	UPDATE_JOB,
@@ -37,6 +38,14 @@ export const getJobs = async (dispatch) => {
 			payload: error.response.data
 		});
 	}
+};
+
+// Get selected job
+export const getSelectedJob = (jobId, dispatch) => {
+	dispatch({
+		type: GET_JOB,
+		payload: jobId
+	});
 };
 
 // Add jobs
@@ -145,6 +154,7 @@ const JobState = (props) => {
 	const initState = {
 		jobs: null,
 		loading: true,
+		selected: null,
 		current: null,
 		error: null,
 		success: true
