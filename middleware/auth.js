@@ -10,7 +10,7 @@ module.exports = function (req, res, next) {
 	if (!token) return res.status(401).json({ msg: 'no token, authorization denied' });
 
 	// verify the token
-	jwt.verify(token, config.get('JWT_SECRET'), (err, decoded) => {
+	jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
 		if (err) {
 			return res.status(401).json({ msg: 'invalid token' });
 		}

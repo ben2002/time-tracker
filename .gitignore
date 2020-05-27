@@ -2,6 +2,7 @@
 .env
 
 models/
+config/
 
 node_modules/
 
