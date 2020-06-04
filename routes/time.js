@@ -33,7 +33,7 @@ router.get('/:id', auth, async (req, res) => {
 router.get('/total/:id', auth, async (req, res) => {
 	let totalTimePerJob = await timeStorage.getTotalTimePerJob(req.params.id);
 	console.log('back:', totalTimePerJob);
-	//totalTimePerJob = totalTimePerJob[0]['sum(`duration`)'];
+	totalTimePerJob = totalTimePerJob[0].sum;
 	res.status(200).json({ totalTimePerJob, success: true });
 });
 
