@@ -32,6 +32,18 @@ body {
 	margin-top: 100px;
 }
 
+.mg-left-50 {
+	margin-left: 50px;
+}
+
+.mg-left-auto {
+	margin-left: auto;
+}
+
+.mg-right-50 {
+	margin-right: 50px;
+}
+
 .pd-top-50 {
 	padding-top: 50px;
 }

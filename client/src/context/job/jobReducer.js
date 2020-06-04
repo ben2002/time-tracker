@@ -21,9 +21,10 @@ const jobReducer = (state, action) => {
 				loading: false
 			};
 		case GET_JOB:
+			console.log('reducer', action.payload);
 			return {
 				...state,
-				selected: state.jobs.map((job) => job.id === action.payload.id),
+				selected: action.payload.job,
 				success: action.payload.success,
 				loading: false
 			};
@@ -31,6 +32,7 @@ const jobReducer = (state, action) => {
 			return {
 				...state,
 				jobs: [action.payload.job, ...state.jobs],
+				selected: action.payload.job,
 				success: action.payload.success,
 				loading: false
 			};
@@ -52,6 +54,7 @@ const jobReducer = (state, action) => {
 				jobs: state.jobs.map((job) =>
 					job.id === action.payload.job.id ? action.payload.job : job
 				),
+				selected: action.payload.job,
 				current: null,
 				success: action.payload.success,
 				loading: false
@@ -63,6 +66,7 @@ const jobReducer = (state, action) => {
 				jobs: state.jobs.filter((job) => {
 					return job.id !== action.payload;
 				}),
+				selected: null,
 				loading: false
 			};
 		case JOB_ERROR:

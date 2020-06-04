@@ -41,11 +41,20 @@ export const getJobs = async (dispatch) => {
 };
 
 // Get selected job
-export const getSelectedJob = (jobId, dispatch) => {
-	dispatch({
-		type: GET_JOB,
-		payload: jobId
-	});
+export const getSelectedJob = async (jobTitle, dispatch) => {
+	try {
+		const res = await axios.get(`api/job/${jobTitle}`);
+		dispatch({
+			type: GET_JOB,
+			payload: res.data
+		});
+	} catch (error) {
+		console.log('Error:', error);
+		dispatch({
+			type: JOB_ERROR,
+			payload: error.response.data
+		});
+	}
 };
 
 // Add jobs
@@ -76,7 +85,7 @@ export const addJob = async (title, dispatch) => {
 	}
 };
 
-// Update job (Finish job) --> @todo: update title
+// Update job
 export const updateJob = async (id, title, dispatch) => {
 	try {
 		const config = {

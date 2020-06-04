@@ -8,16 +8,17 @@ const auth = require('../middleware/auth');
 // @desc    Add a new job
 // @access  Private
 router.post('/', auth, async (req, res) => {
-	const result = await jobStorage.getJobByValue({ title: req.body.title });
-	if (result.length > 0) {
-		return res.status(400).json({ msg: 'Title already exists' });
-	}
-
 	// we access req.user.id from auth-middelware
 	const values = {
 		user_id: req.user.id,
 		title: req.body.title
 	};
+
+	const result = await jobStorage.getJobByValue(values);
+	if (result.length > 0) {
+		return res.status(400).json({ msg: 'Title already exists' });
+	}
+
 	// insert job in db
 	const resultId = await jobStorage.insert(values).returning('id');
 	let job = await jobStorage.getJobByValue({ id: resultId[0] });
@@ -34,11 +35,32 @@ router.get('/', auth, async (req, res) => {
 	res.status(200).json({ jobs: result, success: true });
 });
 
+// @route   GET api/job/:title
+// @desc    Get a job by value
+// @access  Private
+router.get('/:title', auth, async (req, res) => {
+	// we access req.user.id from auth-middelware
+	const values = {
+		user_id: req.user.id,
+		title: req.params.title
+	};
+
+	let job = await jobStorage.getJobByValue(values);
+	job = job[0];
+	res.status(200).json({ job, success: true });
+});
+
 // @route   PUT api/job/:id
 // @desc    update a job
 // @access  Private
 router.put('/:id', auth, async (req, res) => {
-	const result = await jobStorage.getJobByValue({ title: req.body.title });
+	// we access req.user.id from auth-middelware
+	const values = {
+		user_id: req.user.id,
+		title: req.body.title
+	};
+
+	const result = await jobStorage.getJobByValue(values);
 	if (result.length > 0) {
 		return res.status(400).json({ msg: 'Title already exists' });
 	}

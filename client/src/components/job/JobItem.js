@@ -7,8 +7,6 @@ import { deleteJob, setCurrent, useJob } from '../../context/job/JobState';
 import { useTime, startTime, stopTime, getTimesPerJob } from '../../context/time/TimeState';
 
 const JobItem = ({ job }) => {
-	const { title, id } = job;
-
 	const [jobState, jobDispatch] = useJob();
 	const [timeState, timeDispatch] = useTime();
 	const [totalTime, setTotalTime] = useState();
@@ -20,15 +18,17 @@ const JobItem = ({ job }) => {
 	useEffect(() => {
 		(async function test() {
 			try {
-				let totalTimePerJob = await axios.get(`api/time/total/${id}`);
+				let totalTimePerJob = await axios.get(`api/time/total/${job.id}`);
 				console.log('front:', totalTimePerJob);
 				totalTimePerJob = totalTimePerJob.data.totalTimePerJob;
+				console.log('Type:', typeof totalTimePerJob);
+				console.log('front:', totalTimePerJob);
 				setTotalTime(timeConversionBackend(totalTimePerJob));
 			} catch (error) {
 				console.log('Error:', error);
 			}
 		})();
-	}, [isRunning, id]);
+	}, [isRunning]);
 
 	const onEdit = (e) => {
 		e.preventDefault();
@@ -38,12 +38,12 @@ const JobItem = ({ job }) => {
 
 	const onDelete = (e) => {
 		e.preventDefault();
-		deleteJob(id, jobDispatch);
+		deleteJob(job.id, jobDispatch);
 	};
 
 	const onPlay = (e) => {
 		e.preventDefault();
-		startTime(id, timeDispatch);
+		startTime(job.id, timeDispatch);
 	};
 
 	const onStop = (e) => {
@@ -54,22 +54,18 @@ const JobItem = ({ job }) => {
 	return (
 		<div className='card-panel'>
 			<div>
-				# {id} <span className='text-bold'>{title}</span>
+				# {job.id} <span className='text-bold'>{job.title}</span>
 				<a href='!#' onClick={onDelete} className='secondary-content'>
 					<i className='material-icons grey-text'>delete</i>
 				</a>
 				<a href='!#' onClick={onEdit} className='secondary-content'>
 					<i className='material-icons grey-text'>edit</i>
 				</a>
-				<Link to={`/${id}`} className='secondary-content'>
-					<i className='material-icons grey-text'>history</i>
-				</Link>
 			</div>
 			<br />
 			<div className='divider'></div>
 			<br />
 			<div>
-				<i className='inline-icon material-icons grey-text'>access_time</i>
 				<span className='black-text'> total time | {totalTime}</span>
 				<a href='!#' onClick={onStop} className='secondary-content'>
 					<i className='inline-icon material-icons red-text'>stop</i>
@@ -77,6 +73,12 @@ const JobItem = ({ job }) => {
 				<a href='!#' onClick={onPlay} className='secondary-content'>
 					<i className='inline-icon material-icons green-text'>play_circle_outline</i>
 				</a>
+			</div>
+			<div className='margin-top'>
+				<Link to={`/${job.id}`}>
+					<i className='inline-icon material-icons grey-text'>history</i>
+					<span className='black-text'> show all times</span>
+				</Link>
 			</div>
 		</div>
 	);

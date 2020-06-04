@@ -44,17 +44,13 @@ const JobForm = () => {
 
 	const clear = () => {
 		clearCurrent(jobDispatch);
+		setTitle('');
 	};
 
 	return (
 		<Fragment>
 			<form onSubmit={onSubmit}>
 				<div className='col s12 m4 l4'>
-					{/* {!current ? (
-						<h5 className='grey-text center-align'>Add a new Project</h5>
-					) : (
-						<h5 className='grey-text center-align'>Edit a Project</h5>
-					)} */}
 					<input
 						onChange={onChange}
 						value={title}
@@ -64,7 +60,7 @@ const JobForm = () => {
 					/>
 					<div>
 						<button
-							className='btn btn-block btn-flat grey lighten-3 black-text margin-bottom'
+							className='btn btn-block btn-flat cyan darken-3 white-text margin-bottom'
 							type='submit'>
 							{!current ? 'Add Project' : 'Edit Project'}
 						</button>

@@ -46,11 +46,11 @@ const Register = (props) => {
 
 	return (
 		<div className='container'>
-			<form className='col s12' onSubmit={onSubmit}>
+			<form onSubmit={onSubmit}>
 				<div className='row'>
 					<div className='col s12 l4'></div>
-					<div className='col s12 l4 text-center'>
-						<h4>
+					<div className='col s12 l4'>
+						<h4 className='center-align'>
 							Account <span className='cyan-text text-darken-3'> Register </span>
 						</h4>
 					</div>
