@@ -7,7 +7,7 @@ const SelectedItem = () => {
 	const [jobState, jobDispatch] = useJob();
 	const { loading } = jobState;
 
-	const { jobs } = jobState;
+	const { jobs, selected } = jobState;
 
 	useEffect(() => {
 		// init Material JS
@@ -16,7 +16,7 @@ const SelectedItem = () => {
 
 	useEffect(() => {
 		getJobs(jobDispatch);
-	}, [jobDispatch]);
+	}, [jobDispatch, selected]);
 
 	const onChange = (e) => {
 		const title = e.target.value;
