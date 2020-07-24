@@ -1,3 +1,6 @@
 # time-tracker
-full stack time tracking app with React and node
+full stack time tracking app with react and node
+
+- User based with JWT-login
+- Track your time for your projects
 
