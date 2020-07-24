@@ -21,7 +21,6 @@ const jobReducer = (state, action) => {
 				loading: false
 			};
 		case GET_JOB:
-			console.log('reducer', action.payload);
 			return {
 				...state,
 				selected: action.payload.job,

@@ -1,6 +1,6 @@
 export const timeConversionFrontend = (seconds) => {
 	const minutes = (seconds / 60).toFixed(1);
-	const hours = (seconds / (60 * 60)).toFixed(1);
+	const hours = (seconds / (60 * 60)).toFixed(2);
 
 	if (seconds < 60) {
 		return seconds + ' Sec';
@@ -12,9 +12,9 @@ export const timeConversionFrontend = (seconds) => {
 };
 
 export const timeConversionBackend = (millisec) => {
-	const seconds = (millisec / 1000).toFixed(1);
+	const seconds = (millisec / 1000).toFixed(0);
 	const minutes = (millisec / (1000 * 60)).toFixed(1);
-	const hours = (millisec / (1000 * 60 * 60)).toFixed(1);
+	const hours = (millisec / (1000 * 60 * 60)).toFixed(2);
 	const days = (millisec / (1000 * 60 * 60 * 24)).toFixed(1);
 
 	if (seconds < 60) {

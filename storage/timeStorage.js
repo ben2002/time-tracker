@@ -14,7 +14,6 @@ const selectMaxId = (user_id) => {
 	return knex(TABLE).where({ user_id }).max('id', { as: 'id' });
 };
 
-// not in use?
 const getById = (id) => {
 	return knex(TABLE).select('from').where({ id });
 };

@@ -46,11 +46,5 @@ const App = () => {
 export default App;
 
 // @todo
-// Frontend and Backend user-input validation!!!
-
-// jobs separat anzeigen (fertig oder nicht)
-
-// add Grid-system
-// Navbar mit Mobil-Sidebar
-// add preloaders when time is running
-// disabled Buttons, flat Buttons
+// add picture
+// stay selected after refresh
